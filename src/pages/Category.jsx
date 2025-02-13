@@ -1,4 +1,6 @@
 import React from "react";
+import CategoryLayout from "../components/CategoryLayout";
+import { categories } from "../components/Categories";
 
 function Category() {
   return (
@@ -10,48 +12,23 @@ function Category() {
         <table className="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg">
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              <th className="py-2 px-4 border-b">Image</th>
               <th className="py-2 px-4 border-b">ID</th>
               <th className="py-2 px-4 border-b">Category Name</th>
               <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="text-gray-900 dark:text-gray-300 text-center border-b">
-              <td className="py-2 px-4">this a category</td>
-              <td className="py-2 px-4">this is category Name</td>
-              <td className="py-2 px-4 flex gap-2 justify-center">
-                <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                  Edit
-                </button>
-                <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr className="text-gray-900 dark:text-gray-300 text-center border-b">
-              <td className="py-2 px-4">this a category</td>
-              <td className="py-2 px-4">this is category Name</td>
-              <td className="py-2 px-4 flex gap-2 justify-center">
-                <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                  Edit
-                </button>
-                <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr className="text-gray-900 dark:text-gray-300 text-center border-b">
-              <td className="py-2 px-4">this a category</td>
-              <td className="py-2 px-4">this is category Name</td>
-              <td className="py-2 px-4 flex gap-2 justify-center">
-                <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                  Edit
-                </button>
-                <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-                  Delete
-                </button>
-              </td>
-            </tr>
+            {categories.map((category) => {
+              return (
+                <CategoryLayout
+                  key={category.id}
+                  image={category.image}
+                  name={category.name}
+                  id={category.id}
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>
