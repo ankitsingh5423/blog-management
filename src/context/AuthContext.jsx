@@ -5,6 +5,22 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = async () => {
+    try {
+      const loggedIn = await account.get();
+      setUser(loggedIn);
+    } catch (err) {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   async function login(email, password) {
     try {
@@ -12,17 +28,26 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      console.log("user.......", user);
 
       setUser(loggedIn);
-      window.location.replace("/");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function logout() {
+    try {
+      await account.deleteSession("current");
+      setUser(null);
     } catch (error) {
       throw error;
     }
   }
 
   return (
-    <AuthContext.Provider value={{ login }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

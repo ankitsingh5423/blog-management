@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 function Login() {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     try {
       event.preventDefault();
       await login(email, password);
+
+      navigate("/");
+
+      toast.success("Logged in successfully.");
     } catch (error) {
-      
+      toast.error(error.message);
     }
   };
 
