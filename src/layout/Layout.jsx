@@ -36,7 +36,7 @@ function Layout() {
             <section className="flex flex-col min-h-screen">
               <main className="flex-1">
                 <Header />
-                <div>
+                <div className="h-full bg-gray-800">
                   <Outlet />
                 </div>
               </main>

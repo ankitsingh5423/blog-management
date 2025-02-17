@@ -8,19 +8,24 @@ import Category from "./pages/Category";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import GuestRoutes from "./routes/GuestRoutes";
+import AddCategory from "./pages/AddCategory";
 
 function App() {
   return (
     <>
       <AuthProvider>
         <Routes>
+          {/* Protected Routes */}
           <Route element={<ProtectedRoutes />}>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
-              <Route path="category" element={<Category />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/add-category" element={<AddCategory />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
+
+          {/* Guest Routes */}
           <Route element={<GuestRoutes />}>
             <Route path="/login" element={<Login />} />
           </Route>
