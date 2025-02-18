@@ -10,8 +10,6 @@ function Category() {
   const { DATABASE_ID, COLLECTION_ID } = CONFIG;
   const fecthCategory = async () => {
     try {
-      console.log(categories);
-
       const response = await databases.listDocuments(
         DATABASE_ID,
         COLLECTION_ID
@@ -58,6 +56,8 @@ function Category() {
             {categories.map((category) => {
               return (
                 <CategoryLayout
+                  categories={categories}
+                  setCategories={setCategories}
                   key={category.$id}
                   image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf6zoRR_FPG7f2knECoYTgOuETejMYPg71vg&s"
                   name={category.categoryName}

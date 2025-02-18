@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import GuestRoutes from "./routes/GuestRoutes";
 import AddCategory from "./pages/AddCategory";
+import CategoryEdit from "./pages/CategoryEdit";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/category" element={<Category />} />
               <Route path="/add-category" element={<AddCategory />} />
+              <Route
+                path="/edit-category/:categoryId"
+                element={<CategoryEdit />}
+              />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
