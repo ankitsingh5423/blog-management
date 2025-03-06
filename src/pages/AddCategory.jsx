@@ -20,6 +20,8 @@ const AddCategory = () => {
         "unique()",
         { categoryName: category }
       );
+      console.log(DATABASE_ID);
+      
 
       navigate("/category");
 

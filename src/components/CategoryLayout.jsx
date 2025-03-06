@@ -4,8 +4,14 @@ import CONFIG from "../config/constant";
 import { databases } from "../config/appwriteConfig";
 import { Link } from "react-router";
 
-
-function CategoryLayout({ id, image, name, setCategories, categories }) {
+function CategoryLayout({
+  id,
+  image,
+  name,
+  setCategories,
+  categories,
+  userID,
+}) {
   // click on delete button
   // handle delete category
   // delete the selected category
@@ -23,12 +29,14 @@ function CategoryLayout({ id, image, name, setCategories, categories }) {
       toast.error(error.message);
     }
   };
+  console.log(userID)
   return (
     <tr className="text-gray-900 dark:text-gray-300 text-center border-b">
       <td className="py-2 px-4 size-[150px] h-[100px]">
         <img src={image} alt="" className="w-full h-full object-cover" />
       </td>
       <td className="py-2 px-4">{id}</td>
+      <td className="py-2 px-4">{userID}</td>
       <td className="py-2 px-4">{name}</td>
       <td className="py-2 px-4 ">
         <div className="flex gap-2 justify-center">

@@ -4,10 +4,15 @@ import { Link } from "react-router";
 import { toast } from "react-toastify";
 import CONFIG from "../config/constant";
 import { databases } from "../config/appwriteConfig";
+import { useAuth } from "../context/AuthContext";
 
 function Category() {
   const [categories, setCategories] = useState([]);
   const { DATABASE_ID, COLLECTION_ID } = CONFIG;
+  const { user } = useAuth();
+
+  // console.log(categories);
+
   const fecthCategory = async () => {
     try {
       const response = await databases.listDocuments(
@@ -20,9 +25,15 @@ function Category() {
       toast.error(error.message);
     }
   };
+  const userCategories = user
+    ? categories.filter((category) => category.userId === user.$id)
+    : [];
+
   useEffect(() => {
     fecthCategory();
   }, []);
+
+  
 
   return (
     <>
@@ -48,12 +59,13 @@ function Category() {
             <tr className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
               <th className="py-2 px-4 border-b">Image</th>
               <th className="py-2 px-4 border-b">ID</th>
+              <th className="py-2 px-4 border-b">user id</th>
               <th className="py-2 px-4 border-b">Category Name</th>
               <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {categories.map((category) => {
+            {userCategories.map((category) => {
               return (
                 <CategoryLayout
                   categories={categories}
@@ -62,6 +74,7 @@ function Category() {
                   image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf6zoRR_FPG7f2knECoYTgOuETejMYPg71vg&s"
                   name={category.categoryName}
                   id={category.$id}
+                  userID={category.userId}
                 />
               );
             })}
