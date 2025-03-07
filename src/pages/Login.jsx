@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function Login() {
   const { login } = useAuth();
@@ -68,9 +69,9 @@ function Login() {
         </form>
         <p className="mt-4 text-center text-gray-600 dark:text-gray-400">
           Don't have an account?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
+          <Link to="/signup" className="text-blue-500 hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

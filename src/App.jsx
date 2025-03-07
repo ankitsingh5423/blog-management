@@ -10,6 +10,7 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import GuestRoutes from "./routes/GuestRoutes";
 import AddCategory from "./pages/AddCategory";
 import CategoryEdit from "./pages/CategoryEdit";
+import SignUp from "./pages/SingUp";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           {/* Guest Routes */}
           <Route element={<GuestRoutes />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Route>
         </Routes>
       </AuthProvider>

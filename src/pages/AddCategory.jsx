@@ -3,11 +3,18 @@ import { toast } from "react-toastify";
 import { databases } from "../config/appwriteConfig";
 import CONFIG from "../config/constant";
 import { useNavigate } from "react-router";
+import { ID } from "appwrite";
+import { useAuth } from "../context/AuthContext";
 
 const AddCategory = () => {
   const [category, setCategory] = useState("");
-
   const { DATABASE_ID, COLLECTION_ID } = CONFIG;
+  const { user } = useAuth();
+
+  if (!user) {
+    toast.error("User not logged in!");
+    return;
+  }
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -17,11 +24,10 @@ const AddCategory = () => {
       const response = await databases.createDocument(
         DATABASE_ID,
         COLLECTION_ID,
-        "unique()",
-        { categoryName: category }
+        ID.unique(),
+        { categoryName: category, userId: user.$id }
       );
       console.log(DATABASE_ID);
-      
 
       navigate("/category");
 

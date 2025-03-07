@@ -24,11 +24,9 @@ export const AuthProvider = ({ children }) => {
 
   async function login(email, password) {
     try {
-      const loggedIn = await account.createEmailPasswordSession(
-        email,
-        password
-      );
+      await account.createEmailPasswordSession(email, password);
 
+      const loggedIn = await account.get();
       setUser(loggedIn);
     } catch (error) {
       throw error;

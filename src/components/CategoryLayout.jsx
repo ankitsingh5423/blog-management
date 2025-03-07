@@ -29,7 +29,6 @@ function CategoryLayout({
       toast.error(error.message);
     }
   };
-  console.log(userID)
   return (
     <tr className="text-gray-900 dark:text-gray-300 text-center border-b">
       <td className="py-2 px-4 size-[150px] h-[100px]">
