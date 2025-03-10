@@ -12,35 +12,40 @@ function Category() {
   const { DATABASE_ID, COLLECTION_ID } = CONFIG;
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  if (user.labels[0] !== "admin") {
-    navigate("/");
-  }
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   useEffect(() => {
-    console.log(user);
+    if (user === null) return;
+
+    if (user?.labels?.[0] !== "admin") {
+      navigate("/");
+    } else {
+      setIsAuthChecked(true);
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
     const fetchCategory = async () => {
       try {
-        console.log("Fetching categories for user:", user.$id);
-
         const response = await databases.listDocuments(
           DATABASE_ID,
           COLLECTION_ID,
-          [Query.equal("userId", [user.$id])]
+          [Query.equal("userId", [user?.$id])]
         );
 
         console.log("Fetched User Categories:", response.documents);
         setCategories(response.documents);
       } catch (error) {
-        console.error("Error fetching categories:", error);
         toast.error(error.message);
       }
     };
 
-    if (user?.$id) {
+    if (isAuthChecked && user?.$id) {
       fetchCategory();
     }
-  }, [user]); // Added fetchCategory dependency
+  }, [isAuthChecked, user?.$id, DATABASE_ID, COLLECTION_ID]);
+
+  if (!isAuthChecked) return null;
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 shadow-lg h-full">

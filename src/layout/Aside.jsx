@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 function Aside() {
+  const { user } = useAuth();
   return (
     <aside
       id="default-sidebar"
@@ -32,27 +34,31 @@ function Aside() {
               <span className="ms-3">Dashboard</span>
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="category"
-              className={({ isActive }) =>
-                `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
-                  isActive ? "bg-gray-700" : ""
-                }`
-              }
-            >
-              <svg
-                className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
+          {user.labels[0] !== "admin" ? (
+            ""
+          ) : (
+            <li>
+              <NavLink
+                to="category"
+                className={({ isActive }) =>
+                  `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                    isActive ? "bg-gray-700" : ""
+                  }`
+                }
               >
-                <path d="M10 3H3v7h7V3zm2 0v7h9V3h-9zm9 9h-9v9h9v-9zm-11 0H3v9h7v-9z" />
-              </svg>
-              <span className="ms-3">Category</span>
-            </NavLink>
-          </li>
+                <svg
+                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M10 3H3v7h7V3zm2 0v7h9V3h-9zm9 9h-9v9h9v-9zm-11 0H3v9h7v-9z" />
+                </svg>
+                <span className="ms-3">Category</span>
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </aside>
