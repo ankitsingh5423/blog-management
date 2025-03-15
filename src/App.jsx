@@ -11,6 +11,7 @@ import GuestRoutes from "./routes/GuestRoutes";
 import AddCategory from "./pages/AddCategory";
 import CategoryEdit from "./pages/CategoryEdit";
 import SignUp from "./pages/SingUp";
+import Blogs from "./pages/Blogs";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 path="/edit-category/:categoryId"
                 element={<CategoryEdit />}
               />
+              <Route path="/blog" element={<Blogs />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>

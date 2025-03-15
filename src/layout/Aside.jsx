@@ -59,6 +59,28 @@ function Aside() {
               </NavLink>
             </li>
           )}
+          <li>
+            <NavLink
+              to="blog"
+              className={({ isActive }) =>
+                `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  isActive ? "bg-gray-700" : ""
+                }`
+              }
+            >
+              <svg
+                className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6c-1.1 0-2 .9-2 2z" />
+                <path d="M14 3v5h5M8 10h8M8 14h8M8 18h5" />
+              </svg>
+              <span className="ms-3">Blog</span>
+            </NavLink>
+          </li>
         </ul>
       </div>
     </aside>

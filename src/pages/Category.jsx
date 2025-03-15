@@ -33,7 +33,6 @@ function Category() {
           [Query.equal("userId", [user?.$id])]
         );
 
-        console.log("Fetched User Categories:", response.documents);
         setCategories(response.documents);
       } catch (error) {
         toast.error(error.message);
