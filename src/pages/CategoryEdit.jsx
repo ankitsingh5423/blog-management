@@ -6,14 +6,14 @@ import { toast } from "react-toastify";
 
 const CategoryEdit = () => {
   const { categoryId } = useParams();
-  const { DATABASE_ID, COLLECTION_ID } = CONFIG;
+  const { DATABASE_ID, COLLECTION_ID_CATEGORY } = CONFIG;
   const navigate = useNavigate();
 
   const fecthCategoryById = async (categoryId) => {
     try {
       const response = await databases.getDocument(
         DATABASE_ID,
-        COLLECTION_ID,
+        COLLECTION_ID_CATEGORY,
         categoryId
       );
 
@@ -32,7 +32,7 @@ const CategoryEdit = () => {
     try {
       e.preventDefault();
 
-      await databases.updateDocument(DATABASE_ID, COLLECTION_ID, categoryId, {
+      await databases.updateDocument(DATABASE_ID, COLLECTION_ID_CATEGORY, categoryId, {
         categoryName: category,
       });
 

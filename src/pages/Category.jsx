@@ -9,7 +9,7 @@ import CategoryLayout from "../components/CategoryLayout";
 
 function Category() {
   const [categories, setCategories] = useState([]);
-  const { DATABASE_ID, COLLECTION_ID } = CONFIG;
+  const { DATABASE_ID, COLLECTION_ID_CATEGORY } = CONFIG;
   const { user } = useAuth();
   const navigate = useNavigate();
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -29,7 +29,7 @@ function Category() {
       try {
         const response = await databases.listDocuments(
           DATABASE_ID,
-          COLLECTION_ID,
+          COLLECTION_ID_CATEGORY,
           [Query.equal("userId", [user?.$id])]
         );
 
@@ -42,7 +42,7 @@ function Category() {
     if (isAuthChecked && user?.$id) {
       fetchCategory();
     }
-  }, [isAuthChecked, user?.$id, DATABASE_ID, COLLECTION_ID]);
+  }, [isAuthChecked, user?.$id, DATABASE_ID, COLLECTION_ID_CATEGORY]);
 
   if (!isAuthChecked) return null;
 

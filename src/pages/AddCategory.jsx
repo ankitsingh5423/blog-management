@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext";
 
 const AddCategory = () => {
   const [category, setCategory] = useState("");
-  const { DATABASE_ID, COLLECTION_ID } = CONFIG;
+  const { DATABASE_ID, COLLECTION_ID_CATEGORY } = CONFIG;
   const { user } = useAuth();
 
   if (!user) {
@@ -23,7 +23,7 @@ const AddCategory = () => {
     try {
       const response = await databases.createDocument(
         DATABASE_ID,
-        COLLECTION_ID,
+        COLLECTION_ID_CATEGORY,
         ID.unique(),
         { categoryName: category, userId: user.$id }
       );
