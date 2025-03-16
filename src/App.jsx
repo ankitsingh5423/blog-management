@@ -28,7 +28,7 @@ function App() {
                 path="/edit-category/:categoryId"
                 element={<CategoryEdit />}
               />
-              <Route path="/blog" element={<Blogs />} />
+              <Route path="/blog" element={<Blogs/>} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
